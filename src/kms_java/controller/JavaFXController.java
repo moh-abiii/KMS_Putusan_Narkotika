@@ -16,7 +16,7 @@ public class JavaFXController {
     @FXML private TableView<Putusan> tablePutusan;
     @FXML private TableColumn<Putusan, String> colNomor, colTerdakwa, colJenis;
     @FXML private TableColumn<Putusan, Double> colBerat;
-    @FXML private TableColumn<Putusan, Integer> colVonis;
+    @FXML private TableColumn<Putusan, String> colVonis;
 
     private KnowledgeRepository repository;
     private ObservableList<Putusan> observableList;
@@ -26,14 +26,23 @@ public class JavaFXController {
         refreshTable(repository.getDaftarSemua());
     }
 
-    @FXML
     public void initialize() {
         colNomor.setCellValueFactory(new PropertyValueFactory<>("nomorPerkara"));
         colTerdakwa.setCellValueFactory(new PropertyValueFactory<>("namaTerdakwa"));
         colJenis.setCellValueFactory(new PropertyValueFactory<>("jenisNarkotika"));
         colBerat.setCellValueFactory(new PropertyValueFactory<>("beratBarangBukti"));
-        colVonis.setCellValueFactory(new PropertyValueFactory<>("vonisHukuman"));
+
+        colVonis.setCellValueFactory(cellData -> {
+            int totalBulan = cellData.getValue().getVonisHukuman();
+            if (totalBulan < 12) {
+                return new javafx.beans.property.SimpleStringProperty(totalBulan + " Bulan");
+            } else {
+                int tahun = totalBulan / 12;
+                return new javafx.beans.property.SimpleStringProperty(tahun + " Tahun (" + totalBulan + " Bulan)");
+            }
+        });
     }
+
 
     private void refreshTable(ArrayList<Putusan> daftar) {
         observableList = FXCollections.observableArrayList(daftar);
