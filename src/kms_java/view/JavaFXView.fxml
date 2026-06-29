@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @idea inspex_only_syntax -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com" xmlns:fx="http://javafx.com"
+            fx:controller="kms_java.controller.JavaFXController" prefWidth="955.0" prefHeight="655.0">
+    <top>
+        <Label text="KNOWLEDGE MANAGEMENT SYSTEM (KMS) PUTUSAN NARKOTIKA"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" bottom="15"/>
+            </padding>
+        </Label>
+    </top>
+
+    <left>
+        <VBox spacing="10" prefWidth="285.0" style="-fx-border-color: #dcdde1; -fx-border-width: 0 1 0 0;">
+            <padding>
+                <Insets top="10" right="15" bottom="10" left="15"/>
+            </padding>
+            <Label text="Form Input Putusan Baru" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+            <TextField fx:id="txtNomor" promptText="Nomor Perkara (Contoh: 101/Pid.Sus/PN...)"/>
+            <TextField fx:id="txtPengadilan" promptText="Nama Pengadilan Negeri"/>
+            <TextField fx:id="txtTerdakwa" promptText="Nama Lengkap Terdakwa"/>
+            <TextField fx:id="txtJenis" promptText="Jenis Narkotika (Sabu/Ganja)"/>
+            <TextField fx:id="txtBerat" promptText="Berat Barang Bukti (Gram)"/>
+            <TextField fx:id="txtVonis" promptText="Vonis Hukuman (Bulan)"/>
+
+            <Button text="💾 Simpan Data Putusan" onAction="#handleTambah" maxWidth="Infinity"
+                    style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Separator/>
+            <Button text="📊 Lihat Statistik Kasus" onAction="#handleStatistik" maxWidth="Infinity"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="15" bottom="10" left="15"/>
+            </padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtCari" promptText="Cari Nomor Perkara / Nama Terdakwa..." prefWidth="355.0"/>
+                <Button text="🔍 Cari" onAction="#handleCari" style="-fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="🗑️ Hapus Terpilih" onAction="#handleHapus"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+            <TableView fx:id="tablePutusan" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNomor" text="Nomor Perkara" prefWidth="205.0"/>
+                    <TableColumn fx:id="colTerdakwa" text="Nama Terdakwa" prefWidth="185.0"/>
+                    <TableColumn fx:id="colJenis" text="Jenis Narkotika" prefWidth="125.0"/>
+                    <TableColumn fx:id="colBerat" text="Berat (g)" prefWidth="85.0"/>
+                    <TableColumn fx:id="colVonis" text="Vonis (Bulan)" prefWidth="105.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
